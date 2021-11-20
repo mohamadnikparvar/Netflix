@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
+import YouTube from "react-youtube"
+
 // axios
 import axios from '../services/axios'
 
@@ -21,6 +23,15 @@ const Row = ({title, fetchUrl}) => {
         fetchData();
     },[fetchUrl])
 
+    const opts ={
+        height: "390",
+        width: "100",
+        playerVars: {
+            // https://developers.google.com/youtube/player_parameters
+            autoplay:1,
+        }
+    }
+
     return (
         <div className={styles.row}>
             <h2>{title}</h2>
@@ -33,6 +44,7 @@ const Row = ({title, fetchUrl}) => {
                     alt={movie.name}/>
                 ))}
             </div>
+            <YouTube videoId={trailerUrl} opts={opts}/>
         </div>
     );
 };
